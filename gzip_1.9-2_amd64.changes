@@ -1,0 +1,33 @@
+Format: 1.8
+Date: Sun, 05 Aug 2018 08:30:09 +0800
+Source: gzip
+Binary: gzip gzip-win32
+Built-For-Profiles: nobiarch nocheck nodoc
+Architecture: amd64 all
+Version: 1.9-2
+Distribution: unstable
+Urgency: medium
+Maintainer: Bdale Garbee <bdale@gag.com>
+Changed-By: Bdale Garbee <bdale@gag.com>
+Description:
+ gzip       - GNU compression utilities
+ gzip-win32 - GNU compression utility (win32 build)
+Changes:
+ gzip (1.9-2) unstable; urgency=medium
+ .
+   * move to upstream's less-ugly fix for mingw compilation failure
+Checksums-Sha1:
+ afec56a2d9e316c8be1b713e3ee5bcd33507d347 111720 gzip-dbgsym_1.9-2_amd64.deb
+ b888e21903e1e2041ec07c440b872bafd5521160 37776 gzip-win32_1.9-2_all.deb
+ a8c5865e348504938bac7bd8a8fc6fe3df38c773 5982 gzip_1.9-2_amd64.buildinfo
+ 02ec1c2be9c795a15f0a18f3916c45553e0c079c 196816 gzip_1.9-2_amd64.deb
+Checksums-Sha256:
+ 03ec8c21c16980ac3576d3b96690f33a0877c0090928699c90d31b33e8489647 111720 gzip-dbgsym_1.9-2_amd64.deb
+ 52fba680df1765cf68b5c13c915998b95848a83f1688e78e943bd801f9175de4 37776 gzip-win32_1.9-2_all.deb
+ 2d991bfaf51fbdb3b98f149cf5308094157f49eb4dbcb1a7515431d32e0b9c70 5982 gzip_1.9-2_amd64.buildinfo
+ 23c2af72193fc983b15aa1b1de93ebf8f3bb02c700143bfaf4a77e2e3238dc3c 196816 gzip_1.9-2_amd64.deb
+Files:
+ 14676f0f8444bbde4ef3af580f4d1511 111720 debug optional gzip-dbgsym_1.9-2_amd64.deb
+ 661b70dd19c7db70c152014edd3f4477 37776 utils optional gzip-win32_1.9-2_all.deb
+ ed438798efa7e4253402328ea07c261b 5982 utils required gzip_1.9-2_amd64.buildinfo
+ d7abf8ef1c49854bf00fd4fb4296a5b0 196816 utils required gzip_1.9-2_amd64.deb

@@ -1,0 +1,4 @@
+gzip-dbgsym_1.9-2_amd64.deb debug optional automatic=yes
+gzip-win32_1.9-2_all.deb utils optional
+gzip_1.9-2_amd64.buildinfo utils required
+gzip_1.9-2_amd64.deb utils required

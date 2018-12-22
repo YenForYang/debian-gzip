@@ -1,0 +1,2338 @@
+ dpkg-buildpackage -d -us -uc -ui -b -Jauto -Pnobiarch,nocheck,nodoc
+dpkg-buildpackage: info: source package gzip
+dpkg-buildpackage: info: source version 1.9-2
+dpkg-buildpackage: info: source distribution unstable
+dpkg-buildpackage: info: source changed by Bdale Garbee <bdale@gag.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ fakeroot debian/rules clean
+dh_testdir
+dh_testroot
+rm -f build-stamp build-indep-stamp configure-stamp configure-indep-stamp reconf-stamp
+rm -rf builddir builddir-indep
+dh_clean
+	rm -f debian/debhelper-build-stamp
+	rm -rf debian/.debhelper/
+	rm -f -- debian/gzip.substvars debian/gzip-win32.substvars debian/files
+	rm -fr -- debian/gzip/ debian/tmp/ debian/gzip-win32/
+	find .  \( \( \
+		\( -path .\*/.git -o -path .\*/.svn -o -path .\*/.bzr -o -path .\*/.hg -o -path .\*/CVS -o -path .\*/.pc -o -path .\*/_darcs \) -prune -o -type f -a \
+	        \( -name '#*#' -o -name '.*~' -o -name '*~' -o -name DEADJOE \
+		 -o -name '*.orig' -o -name '*.rej' -o -name '*.bak' \
+		 -o -name '.*.orig' -o -name .*.rej -o -name '.SUMS' \
+		 -o -name TAGS -o \( -path '*/.deps/*' -a -name '*.P' \) \
+		\) -exec rm -f {} + \) -o \
+		\( -type d -a -name autom4te.cache -prune -exec rm -rf {} + \) \)
+FAKEROOTKEY=1898192741 LD_LIBRARY_PATH=:/opt/intel/lib/intel64_lin:/opt/intel/tbb/lib/intel64/gcc4.7 LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libfakeroot/libfakeroot-sysv.so debian/rules clean
+ debian/rules build
+cp -f /usr/share/misc/config.sub build-aux/config.sub
+cp -f /usr/share/misc/config.guess build-aux/config.guess
+autoreconf -v
+autoreconf: Entering directory `.'
+autoreconf: configure.ac: not using Gettext
+autoreconf: running: aclocal 
+autoreconf: configure.ac: tracing
+autoreconf: configure.ac: not using Libtool
+autoreconf: running: /usr/bin/autoconf
+autoreconf: running: /usr/bin/autoheader
+autoreconf: running: automake --no-force
+autoreconf: Leaving directory `.'
+:>reconf-stamp
+dh_testdir
+mkdir -p builddir
+cd builddir && env \
+    CC='ccache icc' CFLAGS='-g -O2 -fdebug-prefix-map=/dev/shm/gzip/gzip=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall' CPPFLAGS='-Wdate-time -D_FORTIFY_SOURCE=2  -DUNALIGNED_OK' LDFLAGS='-Wl,-z,relro -Wl,--as-needed,--gc-sections,--relax' \
+    CONFIG_SHELL=/bin/sh ../configure --prefix=/usr --bindir=/bin --infodir='/dev/shm/gzip/gzip'/debian/gzip/usr/share/info --mandir='/dev/shm/gzip/gzip'/debian/gzip/usr/share/man
+configure: loading site script /usr/share/config.site
+../configure: 28: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+Intel(R) Parallel Studio XE 2019 Update 1 for Linux*
+Copyright (C) 2009-2018 Intel Corporation. All rights reserved.
+../configure: 49: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 54: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 59: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 63: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 67: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 71: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+../configure: 75: /opt/intel/parallel_studio_xe_2019/psxevars.sh: [[: not found
+checking for a BSD-compatible install... /usr/bin/install
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... /usr/bin/gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... ccache icc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether ccache icc accepts -g... yes
+checking for ccache icc option to accept ISO C89... none needed
+checking whether ccache icc understands -c and -o together... yes
+checking dependency style of ccache icc... gcc3
+checking for ccache icc option to accept ISO C99... none needed
+checking for ccache icc option to accept ISO Standard C... (cached) none needed
+checking how to run the C preprocessor... ccache icc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for nm... /usr/bin/x86_64-linux-gnu-nm -B
+checking whether ln -s works... yes
+checking for ranlib... xiar s
+checking for a POSIX-compliant shell... /bin/bash
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for Minix Amsterdam compiler... no
+checking for ar... xiar
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... yes
+checking for sys/socket.h... yes
+checking for dirent.h... yes
+checking for features.h... yes
+checking for sys/stat.h... (cached) yes
+checking for getopt.h... yes
+checking for sys/cdefs.h... yes
+checking for sys/time.h... yes
+checking for limits.h... yes
+checking for math.h... yes
+checking for sys/mman.h... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for utime.h... yes
+checking for crtdefs.h... no
+checking for fcntl.h... yes
+checking for memory.h... (cached) yes
+checking for time.h... yes
+checking for _set_invalid_parameter_handler... no
+checking for fchdir... yes
+checking for fdopendir... yes
+checking for fcntl... yes
+checking for symlink... yes
+checking for mempcpy... yes
+checking for vasnprintf... no
+checking for snprintf... yes
+checking for fpurge... no
+checking for __fpurge... yes
+checking for __freading... yes
+checking for __fseterr... no
+checking for fstatat... yes
+checking for fsync... yes
+checking for getdtablesize... yes
+checking for getprogname... no
+checking for getexecname... no
+checking for gettimeofday... yes
+checking for nanotime... no
+checking for lstat... yes
+checking for mprotect... yes
+checking for openat... yes
+checking for strerror_r... yes
+checking for __xpg_strerror_r... yes
+checking for strdup... yes
+checking for catgets... yes
+checking for pipe... yes
+checking for unlinkat... yes
+checking for utime... yes
+checking for futimes... yes
+checking for futimesat... yes
+checking for futimens... yes
+checking for utimensat... yes
+checking for lutimes... yes
+checking for chown... yes
+checking for fchmod... yes
+checking for fchown... yes
+checking for siginterrupt... yes
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking whether // is distinct from /... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... (cached) yes
+checking whether strerror_r returns char *... yes
+checking whether fchdir is declared... yes
+checking for working fcntl.h... yes
+checking for pid_t... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking whether fdatasync is declared... yes
+checking for stdint.h... yes
+checking for inttypes.h... yes
+checking whether printf supports size specifiers as in C99... yes
+checking whether printf supports 'long double' arguments... yes
+checking whether printf supports infinite 'double' arguments... yes
+checking whether byte ordering is bigendian... no
+checking whether long double and double are the same... no
+checking whether printf supports infinite 'long double' arguments... yes
+checking whether printf supports the 'a' and 'A' directives... yes
+checking whether printf supports the 'F' directive... yes
+checking whether printf supports the 'n' directive... no
+checking whether printf supports the 'ls' directive... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking whether printf supports the grouping flag... yes
+checking whether printf supports the left-adjust flag correctly... yes
+checking whether printf supports the zero flag correctly... yes
+checking whether printf supports large precisions... yes
+checking whether printf survives out-of-memory conditions... yes
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking for wchar_t... yes
+checking for wint_t... yes
+checking whether wint_t is too small... no
+checking for intmax_t... yes
+checking where to find the exponent in a 'double'... word 1 bit 20
+checking whether snprintf returns a byte count as in C99... yes
+checking for snprintf... (cached) yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... yes
+checking for wcrtomb... yes
+checking whether _snprintf is declared... no
+checking whether frexp() can be used without linking with libm... yes
+checking whether alarm is declared... yes
+checking whether stdin defaults to large file offsets... yes
+checking whether fseeko is declared... yes
+checking for fseeko... yes
+checking whether fflush works on input streams... no
+checking whether stat file-mode macros are broken... no
+checking for nlink_t... yes
+checking whether lstat correctly handles trailing slash... yes
+checking whether ftello is declared... yes
+checking for ftello... yes
+checking whether ftello works... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking for getcwd with POSIX signature... yes
+checking whether getdtablesize is declared... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking for working GNU getopt_long function... yes
+checking for C/C++ restrict keyword... __restrict
+checking for struct timeval... yes
+checking for wide-enough struct timeval.tv_sec member... yes
+checking host CPU and C ABI... x86_64
+checking where to find the exponent in a 'float'... word 0 bit 23
+checking whether limits.h has ULLONG_WIDTH etc.... yes
+checking for ld... xild -m elf_x86_64
+checking if the linker (xild -m elf_x86_64) is GNU ld... yes
+checking for shared library run path origin... done
+checking for the common suffixes of directories in the library search path... lib,lib
+checking whether imported symbols can be declared weak... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for pthread_kill in -lpthread... yes
+checking for multithread API to use... posix
+checking for a sed that does not truncate output... /bin/sed
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking whether memrchr is declared... yes
+checking for O_CLOEXEC... yes
+checking whether strerror(0) succeeds... yes
+checking for strerror_r with POSIX signature... yes
+checking whether strerror_r works... no
+checking whether strerror_r is declared... (cached) yes
+checking for ptrdiff_t... yes
+checking whether C symbols are prefixed with underscore at the linker level... no
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking whether stdint.h conforms to C99... yes
+checking whether stdint.h predates C++11... no
+checking whether stdint.h has UINTMAX_WIDTH etc.... yes
+checking whether strdup is declared... yes
+checking for struct timespec in <time.h>... yes
+checking whether the utimes function works... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for 64-bit time_t... yes
+checking for alloca as a compiler built-in... yes
+checking for GNU libc compatible calloc... yes
+checking whether this system has an arbitrary file name length limit... yes
+checking for library containing clock_gettime... none required
+checking for clock_gettime... yes
+checking for clock_settime... yes
+checking for closedir... yes
+checking for dirfd... yes
+checking whether dirfd is declared... yes
+checking whether dirfd is a macro... no
+checking whether // is distinct from /... (cached) no
+checking whether dup works... yes
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fflush works on input streams... (cached) no
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking for library containing fdatasync... none required
+checking whether fdopendir is declared... yes
+checking whether fdopendir works... yes
+checking whether fflush works on input streams... (cached) no
+checking whether conversion from 'int' to 'long double' works... yes
+checking for ptrdiff_t... (cached) yes
+checking whether fpurge is declared... no
+checking whether frexp works... yes
+checking whether frexpl is declared... yes
+checking whether frexpl() can be used without linking with libm... yes
+checking whether frexpl works... yes
+checking for fseeko... (cached) yes
+checking whether fflush works on input streams... (cached) no
+checking for _fseeki64... no
+checking whether fstatat (..., 0) works... yes
+checking for ftello... (cached) yes
+checking whether ftello works... (cached) yes
+checking whether getdtablesize works... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking whether __argv is declared... no
+checking whether gettimeofday clobbers localtime buffer... no
+checking for gettimeofday with POSIX signature... yes
+checking whether isnan(double) can be used without linking with libm... yes
+checking whether isnan(float) can be used without linking with libm... yes
+checking whether isnan(float) works... yes
+checking whether isnan(long double) can be used without linking with libm... yes
+checking whether isnanl works... yes
+checking for C compiler flag to ignore unused libraries... -Wl,--as-needed
+checking for pthread_rwlock_t... yes
+checking whether pthread_rwlock_rdlock prefers a writer to a reader... no
+checking whether lseek detects pipes... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether NAN macro works... yes
+checking whether HUGE_VAL works... yes
+checking for mempcpy... (cached) yes
+checking for memrchr... yes
+checking whether open recognizes a trailing slash... yes
+checking for opendir... yes
+checking whether frexp works... (cached) yes
+checking whether ldexp can be used without linking with libm... yes
+checking whether frexpl() can be used without linking with libm... (cached) yes
+checking whether frexpl works... (cached) yes
+checking whether frexpl is declared... (cached) yes
+checking whether ldexpl() can be used without linking with libm... yes
+checking whether ldexpl works... yes
+checking whether ldexpl is declared... yes
+checking for readdir... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking whether rmdir works... yes
+checking for signbit macro... yes
+checking for signbit compiler built-ins... yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on files... yes
+checking for struct stat.st_atim.tv_nsec... yes
+checking whether struct stat.st_atim is of type struct timespec... yes
+checking for struct stat.st_birthtimespec.tv_nsec... no
+checking for struct stat.st_birthtimensec... no
+checking for struct stat.st_birthtim.tv_nsec... no
+checking for max_align_t... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking which flavor of printf attribute matches inttypes macros... system
+checking for working stdnoreturn.h... yes
+checking for stpcpy... yes
+checking for working strerror function... yes
+checking for nlink_t... (cached) yes
+checking whether unlink honors trailing slashes... yes
+checking whether unlink of a parent directory fails as it should... guessing yes
+checking for ptrdiff_t... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for stdint.h... (cached) yes
+checking for underline in external names... no
+checking for an assembler syntax supported by this package... /opt/intel/compilers_and_libraries/linux/pkg_bin/intel64/cpp: No such file or directory
+no
+checking for library containing strerror... none required
+checking for an ANSI C-conforming const... yes
+checking for ANSI C header files... (cached) yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking return type of signal handlers... void
+checking for size_t... (cached) yes
+checking for off_t... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating lib/Makefile
+config.status: creating tests/Makefile
+config.status: creating lib/config.h
+config.status: linking ../GNUmakefile to GNUmakefile
+config.status: executing depfiles commands
+:>configure-stamp
+dh_testdir
+/usr/bin/make -C builddir
+make[1]: Entering directory '/dev/shm/gzip/gzip/builddir'
+  GEN      version.c
+  GEN      version.h
+/usr/bin/make  all-recursive
+make[2]: Entering directory '/dev/shm/gzip/gzip/builddir'
+Making all in lib
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/lib'
+  GEN      alloca.h
+  GEN      dirent.h
+  GEN      fcntl.h
+  GEN      limits.h
+  GEN      math.h
+  GEN      stdio.h
+  GEN      stdlib.h
+  GEN      string.h
+  GEN      sys/stat.h
+  GEN      sys/time.h
+  GEN      sys/types.h
+  GEN      time.h
+  GEN      unistd.h
+  GEN      wchar.h
+/usr/bin/make  all-am
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir/lib'
+  CC       cloexec.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       opendir-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       dirname-lgpl.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       basename-lgpl.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       stripslash.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  CC       exitfail.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       creat-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       open-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       fd-hook.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       fd-safer-flag.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       dup-safer-flag.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       filenamecat-lgpl.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       freading.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       getprogname.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       gettime.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       glthread/lock.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       malloca.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       math.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       openat-die.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       openat-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       printf-frexp.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       printf-frexpl.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       save-cwd.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.09 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.10 (CPU)       0.00 (elapsed)
+  CC       savedir.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       stat-time.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       statat.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       glthread/threadlib.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       timespec.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       unistd.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       dup-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       fd-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       pipe-safer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       utimens.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.10 (CPU)       0.00 (elapsed)
+  CC       xmalloc.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       xalloc-die.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       xsize.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       yesno.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       asnprintf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  CC       chdir-long.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.10 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       0.00 (elapsed)
+  CC       fclose.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fcntl.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       fflush.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fprintf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fpurge.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fseek.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fseeko.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fseterr.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       1.00 (elapsed)
+  CC       localtime-buffer.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.00 (CPU)       0.00 (elapsed)
+Total compilation time               0.02 (CPU)       0.00 (elapsed)
+  CC       openat-proc.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       0.00 (elapsed)
+  CC       perror.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       printf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       printf-args.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       printf-parse.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       strerror.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       strerror_r.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       vasnprintf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+../../lib/vasnprintf.c(4848): warning #1292: unknown attribute "__fallthrough__"
+                      FALLTHROUGH;
+                      ^
+
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+  CC       vfprintf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  AR       libgzip.a
+xiar: executing 'ar'
+xiar: executing 'ar'
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir/lib'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/lib'
+Making all in doc
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/doc'
+  MAKEINFO ../../doc/gzip.info
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/doc'
+Making all in .
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir'
+  CC       bits.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       1.00 (elapsed)
+  CC       deflate.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       gzip.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+../gzip.c(605): warning #1292: unknown attribute "__fallthrough__"
+              FALLTHROUGH;
+              ^
+
+Front end time                       0.17 (CPU)       0.00 (elapsed)
+Back end time                        0.09 (CPU)       0.00 (elapsed)
+Total compilation time               0.26 (CPU)       0.00 (elapsed)
+  CC       inflate.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.09 (CPU)       1.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       1.00 (elapsed)
+  CC       lzw.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       trees.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       unlzh.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       unlzw.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.09 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       unpack.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       unzip.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       util.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+  CC       zip.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       version.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.00 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  AR       libver.a
+xiar: executing 'ar'
+xiar: executing 'ar'
+  CCLD     gzip
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/gzip/gzip=.'
+ipo: warning #11021: unresolved __open_missing_mode
+        Referenced in libgzip.a(open-safer.o)
+ipo: warning #11021: unresolved __open_too_many_args
+        Referenced in libgzip.a(open-safer.o)
+ipo: warning #11021: unresolved __openat_missing_mode
+        Referenced in libgzip.a(openat-safer.o)
+ipo: warning #11021: unresolved __openat_too_many_args
+        Referenced in libgzip.a(openat-safer.o)
+  GEN      gunzip
+  GEN      gzexe
+  GEN      zcat
+  GEN      zcmp
+  GEN      zdiff
+  GEN      zegrep
+  GEN      zfgrep
+  GEN      zforce
+  GEN      zgrep
+  GEN      zless
+  GEN      zmore
+  GEN      znew
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+Making all in tests
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/tests'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/tests'
+make[2]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+make[1]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+:>build-stamp
+dh_testdir
+mkdir -p builddir-indep
+cd builddir-indep && ../configure --host=i686-w64-mingw32
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for i686-w64-mingw32-strip... no
+checking for strip... strip
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for i686-w64-mingw32-gcc... ccache icc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether ccache icc accepts -g... yes
+checking for ccache icc option to accept ISO C89... none needed
+checking whether ccache icc understands -c and -o together... yes
+checking dependency style of ccache icc... gcc3
+checking for ccache icc option to accept ISO C99... none needed
+checking for ccache icc option to accept ISO Standard C... (cached) none needed
+checking how to run the C preprocessor... ccache icc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for i686-w64-mingw32-nm... no
+checking for nm... nm
+checking whether ln -s works... yes
+checking for i686-w64-mingw32-ranlib... no
+checking for ranlib... ranlib
+checking for a POSIX-compliant shell... /bin/bash
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for Minix Amsterdam compiler... no
+checking for i686-w64-mingw32-ar... xiar
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... i686-w64-mingw32
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... yes
+checking for sys/socket.h... yes
+checking for dirent.h... yes
+checking for features.h... yes
+checking for sys/stat.h... (cached) yes
+checking for getopt.h... yes
+checking for sys/cdefs.h... yes
+checking for sys/time.h... yes
+checking for limits.h... yes
+checking for math.h... yes
+checking for sys/mman.h... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for utime.h... yes
+checking for crtdefs.h... no
+checking for fcntl.h... yes
+checking for memory.h... (cached) yes
+checking for time.h... yes
+checking for _set_invalid_parameter_handler... no
+checking for fchdir... yes
+checking for fdopendir... yes
+checking for fcntl... yes
+checking for symlink... yes
+checking for mempcpy... yes
+checking for vasnprintf... no
+checking for snprintf... yes
+checking for fpurge... no
+checking for __fpurge... yes
+checking for __freading... yes
+checking for __fseterr... no
+checking for fstatat... yes
+checking for fsync... yes
+checking for getdtablesize... yes
+checking for getprogname... no
+checking for getexecname... no
+checking for gettimeofday... yes
+checking for nanotime... no
+checking for lstat... yes
+checking for mprotect... yes
+checking for openat... yes
+checking for strerror_r... yes
+checking for __xpg_strerror_r... yes
+checking for strdup... yes
+checking for catgets... yes
+checking for pipe... yes
+checking for unlinkat... yes
+checking for utime... yes
+checking for futimes... yes
+checking for futimesat... yes
+checking for futimens... yes
+checking for utimensat... yes
+checking for lutimes... yes
+checking for chown... yes
+checking for fchmod... yes
+checking for fchown... yes
+checking for siginterrupt... yes
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking whether // is distinct from /... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... (cached) yes
+checking whether strerror_r returns char *... yes
+checking whether fchdir is declared... yes
+checking for working fcntl.h... yes
+checking for pid_t... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking whether fdatasync is declared... yes
+checking for stdint.h... yes
+checking for inttypes.h... yes
+checking whether printf supports size specifiers as in C99... yes
+checking whether printf supports 'long double' arguments... yes
+checking whether printf supports infinite 'double' arguments... yes
+checking whether byte ordering is bigendian... no
+checking whether long double and double are the same... no
+checking whether printf supports infinite 'long double' arguments... yes
+checking whether printf supports the 'a' and 'A' directives... yes
+checking whether printf supports the 'F' directive... yes
+checking whether printf supports the 'n' directive... yes
+checking whether printf supports the 'ls' directive... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking whether printf supports the grouping flag... yes
+checking whether printf supports the left-adjust flag correctly... yes
+checking whether printf supports the zero flag correctly... yes
+checking whether printf supports large precisions... yes
+checking whether printf survives out-of-memory conditions... yes
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking for wchar_t... yes
+checking for wint_t... yes
+checking whether wint_t is too small... no
+checking for intmax_t... yes
+checking where to find the exponent in a 'double'... word 1 bit 20
+checking whether snprintf returns a byte count as in C99... yes
+checking for snprintf... (cached) yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... yes
+checking for wcrtomb... yes
+checking whether _snprintf is declared... no
+checking whether frexp() can be used without linking with libm... yes
+checking whether alarm is declared... yes
+checking whether stdin defaults to large file offsets... yes
+checking for 64-bit off_t... yes
+checking for 64-bit st_size... no
+checking whether fseeko is declared... yes
+checking for fseeko... yes
+checking whether fflush works on input streams... no
+checking whether stat file-mode macros are broken... no
+checking for nlink_t... yes
+checking whether lstat correctly handles trailing slash... yes
+checking whether ftello is declared... yes
+checking for ftello... yes
+checking whether ftello works... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking for getcwd with POSIX signature... yes
+checking whether getdtablesize is declared... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking for working GNU getopt_long function... yes
+checking for C/C++ restrict keyword... __restrict
+checking for struct timeval... yes
+checking for wide-enough struct timeval.tv_sec member... yes
+checking host CPU and C ABI... i386
+checking where to find the exponent in a 'float'... word 0 bit 23
+checking whether limits.h has ULLONG_WIDTH etc.... yes
+checking for ld... xild
+checking if the linker (xild) is GNU ld... yes
+checking for shared library run path origin... done
+checking for the common suffixes of directories in the library search path... lib,lib
+checking whether imported symbols can be declared weak... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for pthread_kill in -lpthread... yes
+checking for multithread API to use... posix
+checking for a sed that does not truncate output... /bin/sed
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking whether memrchr is declared... yes
+checking for O_CLOEXEC... yes
+checking whether strerror(0) succeeds... yes
+checking for strerror_r with POSIX signature... yes
+checking whether strerror_r works... no
+checking whether strerror_r is declared... (cached) yes
+checking whether C symbols are prefixed with underscore at the linker level... no
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking whether stdint.h conforms to C99... yes
+checking whether stdint.h predates C++11... no
+checking whether stdint.h has UINTMAX_WIDTH etc.... yes
+checking whether strdup is declared... yes
+checking for struct timespec in <time.h>... yes
+checking whether the utimes function works... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for 64-bit time_t... yes
+checking for alloca as a compiler built-in... yes
+checking for GNU libc compatible calloc... yes
+checking whether this system has an arbitrary file name length limit... yes
+checking for library containing clock_gettime... none required
+checking for clock_gettime... yes
+checking for clock_settime... yes
+checking for closedir... yes
+checking for dirfd... yes
+checking whether dirfd is declared... yes
+checking whether dirfd is a macro... no
+checking whether // is distinct from /... (cached) no
+checking whether dup works... yes
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fflush works on input streams... (cached) no
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking for library containing fdatasync... none required
+checking whether fdopendir is declared... yes
+checking whether fdopendir works... yes
+checking whether fflush works on input streams... (cached) no
+checking whether conversion from 'int' to 'long double' works... yes
+checking whether fpurge is declared... no
+checking whether frexp works... yes
+checking whether frexpl is declared... yes
+checking whether frexpl() can be used without linking with libm... yes
+checking whether frexpl works... yes
+checking for fseeko... (cached) yes
+checking whether fflush works on input streams... (cached) no
+checking for _fseeki64... no
+checking whether fstatat (..., 0) works... yes
+checking for ftello... (cached) yes
+checking whether ftello works... (cached) yes
+checking whether getdtablesize works... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking whether __argv is declared... no
+checking whether gettimeofday clobbers localtime buffer... no
+checking for gettimeofday with POSIX signature... yes
+checking whether isnan(double) can be used without linking with libm... yes
+checking whether isnan(float) can be used without linking with libm... yes
+checking whether isnan(float) works... yes
+checking whether isnan(long double) can be used without linking with libm... yes
+checking whether isnanl works... yes
+checking for C compiler flag to ignore unused libraries... -Wl,--as-needed
+checking for pthread_rwlock_t... yes
+checking whether pthread_rwlock_rdlock prefers a writer to a reader... no
+checking whether lseek detects pipes... no
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether NAN macro works... yes
+checking whether HUGE_VAL works... yes
+checking for mempcpy... (cached) yes
+checking for memrchr... yes
+checking for opendir... yes
+checking whether frexp works... (cached) yes
+checking whether ldexp can be used without linking with libm... yes
+checking whether frexpl() can be used without linking with libm... (cached) yes
+checking whether frexpl works... (cached) yes
+checking whether frexpl is declared... (cached) yes
+checking whether ldexpl() can be used without linking with libm... yes
+checking whether ldexpl works... yes
+checking whether ldexpl is declared... yes
+checking for readdir... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking whether rmdir works... yes
+checking for signbit macro... yes
+checking for signbit compiler built-ins... yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for ssize_t... yes
+checking for struct stat.st_atim.tv_nsec... yes
+checking whether struct stat.st_atim is of type struct timespec... yes
+checking for struct stat.st_birthtimespec.tv_nsec... no
+checking for struct stat.st_birthtimensec... no
+checking for struct stat.st_birthtim.tv_nsec... no
+checking for max_align_t... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking which flavor of printf attribute matches inttypes macros... system
+checking for working stdnoreturn.h... yes
+checking for stpcpy... yes
+checking for working strerror function... yes
+checking for nlink_t... (cached) yes
+checking whether unlink honors trailing slashes... yes
+checking whether unlink of a parent directory fails as it should... guessing yes
+checking for ptrdiff_t... yes
+checking for stdint.h... (cached) yes
+checking for underline in external names... no
+checking for an assembler syntax supported by this package... /opt/intel/compilers_and_libraries/linux/pkg_bin/intel64/cpp: No such file or directory
+no
+checking for library containing strerror... none required
+checking for an ANSI C-conforming const... yes
+checking for ANSI C header files... (cached) yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking return type of signal handlers... void
+checking for size_t... (cached) yes
+checking for off_t... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating lib/Makefile
+config.status: creating tests/Makefile
+config.status: creating lib/config.h
+config.status: linking ../GNUmakefile to GNUmakefile
+config.status: executing depfiles commands
+:>configure-indep-stamp
+dh_testdir
+/usr/bin/make -C builddir-indep
+make[1]: Entering directory '/dev/shm/gzip/gzip/builddir-indep'
+  GEN      version.c
+  GEN      version.h
+/usr/bin/make  all-recursive
+make[2]: Entering directory '/dev/shm/gzip/gzip/builddir-indep'
+Making all in lib
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir-indep/lib'
+  GEN      alloca.h
+  GEN      dirent.h
+  GEN      fcntl.h
+  GEN      limits.h
+  GEN      math.h
+  GEN      stdio.h
+  GEN      stdlib.h
+  GEN      string.h
+  GEN      sys/stat.h
+  GEN      sys/time.h
+  GEN      sys/types.h
+  GEN      time.h
+  GEN      unistd.h
+  GEN      utime.h
+  GEN      wchar.h
+/usr/bin/make  all-am
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir-indep/lib'
+  CC       cloexec.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       opendir-safer.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       dirname-lgpl.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       basename-lgpl.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       stripslash.o
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       1.00 (elapsed)
+Total compilation time               0.01 (CPU)       1.00 (elapsed)
+  CC       exitfail.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       creat-safer.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       open-safer.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       fd-hook.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       fd-safer-flag.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       dup-safer-flag.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       filenamecat-lgpl.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       freading.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       getprogname.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       gettime.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       glthread/lock.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       malloca.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       math.o
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       openat-die.o
+In file included from ../../lib/openat-die.c(20):
+../../lib/openat.h(102): warning #274: declaration is not visible outside of function
+  statat (int fd, char const *name, struct stat *st)
+                                           ^
+
+In file included from ../../lib/openat-die.c(20):
+../../lib/openat.h(104): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    return fstatat (fd, name, st, 0);
+                              ^
+
+In file included from ../../lib/openat-die.c(20):
+../../lib/openat.h(108): warning #274: declaration is not visible outside of function
+  lstatat (int fd, char const *name, struct stat *st)
+                                            ^
+
+In file included from ../../lib/openat-die.c(20):
+../../lib/openat.h(110): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    return fstatat (fd, name, st, AT_SYMLINK_NOFOLLOW);
+                              ^
+
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       openat-safer.o
+Front end time                       0.03 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       1.00 (elapsed)
+  CC       printf-frexp.o
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       printf-frexpl.o
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       save-cwd.o
+Front end time                       0.09 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.10 (CPU)       0.00 (elapsed)
+  CC       savedir.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       stat-time.o
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(66): warning #274: declaration is not visible outside of function
+  get_stat_atime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(69): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(79): warning #274: declaration is not visible outside of function
+  get_stat_ctime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(82): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(92): warning #274: declaration is not visible outside of function
+  get_stat_mtime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(95): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(105): warning #274: declaration is not visible outside of function
+  get_stat_birthtime_ns (struct stat const *st _GL_UNUSED)
+                                ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(118): warning #274: declaration is not visible outside of function
+  get_stat_atime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(121): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim);
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(132): warning #274: declaration is not visible outside of function
+  get_stat_ctime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(135): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim);
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(146): warning #274: declaration is not visible outside of function
+  get_stat_mtime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(149): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim);
+           ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(161): warning #274: declaration is not visible outside of function
+  get_stat_birthtime (struct stat const *st _GL_UNUSED)
+                             ^
+
+In file included from ../../lib/stat-time.c(3):
+../../lib/stat-time.h(211): warning #274: declaration is not visible outside of function
+  stat_time_normalize (int result, struct stat *st _GL_UNUSED)
+                                          ^
+
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+compilation aborted for ../../lib/stat-time.c (code 2)
+make[4]: [Makefile:1775: stat-time.o] Error 2 (ignored)
+  CC       statat.o
+In file included from ../../lib/statat.c(3):
+../../lib/openat.h(102): warning #274: declaration is not visible outside of function
+  statat (int fd, char const *name, struct stat *st)
+                                           ^
+
+In file included from ../../lib/statat.c(3):
+../../lib/openat.h(104): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    return fstatat (fd, name, st, 0);
+                              ^
+
+In file included from ../../lib/statat.c(3):
+../../lib/openat.h(108): warning #274: declaration is not visible outside of function
+  lstatat (int fd, char const *name, struct stat *st)
+                                            ^
+
+In file included from ../../lib/statat.c(3):
+../../lib/openat.h(110): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    return fstatat (fd, name, st, AT_SYMLINK_NOFOLLOW);
+                              ^
+
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       glthread/threadlib.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       timespec.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       unistd.o
+Front end time                       0.03 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       1.00 (elapsed)
+  CC       dup-safer.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       fd-safer.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       pipe-safer.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       utimens.o
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(66): warning #274: declaration is not visible outside of function
+  get_stat_atime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(69): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim).tv_nsec;
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(79): warning #274: declaration is not visible outside of function
+  get_stat_ctime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(82): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim).tv_nsec;
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(92): warning #274: declaration is not visible outside of function
+  get_stat_mtime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(95): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim).tv_nsec;
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(105): warning #274: declaration is not visible outside of function
+  get_stat_birthtime_ns (struct stat const *st _GL_UNUSED)
+                                ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(118): warning #274: declaration is not visible outside of function
+  get_stat_atime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(121): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim);
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(132): warning #274: declaration is not visible outside of function
+  get_stat_ctime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(135): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim);
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(146): warning #274: declaration is not visible outside of function
+  get_stat_mtime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(149): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim);
+           ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(161): warning #274: declaration is not visible outside of function
+  get_stat_birthtime (struct stat const *st _GL_UNUSED)
+                             ^
+
+In file included from ../../lib/utimens.c(35):
+../../lib/stat-time.h(211): warning #274: declaration is not visible outside of function
+  stat_time_normalize (int result, struct stat *st _GL_UNUSED)
+                                          ^
+
+../../lib/utimens.c(134): warning #274: declaration is not visible outside of function
+  update_timespec (struct stat const *statbuf, struct timespec *ts[2])
+                          ^
+
+../../lib/utimens.c(148): warning #167: argument of type "const struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+      timespec[0] = get_stat_atime (statbuf);
+                                    ^
+
+../../lib/utimens.c(153): warning #167: argument of type "const struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+      timespec[1] = get_stat_mtime (statbuf);
+                                    ^
+
+../../lib/utimens.c(176): error: incomplete type is not allowed
+    struct stat st;
+                ^
+
+../../lib/utimens.c(521): error: incomplete type is not allowed
+    struct stat st;
+                ^
+
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+compilation aborted for ../../lib/utimens.c (code 2)
+make[4]: [Makefile:1775: utimens.o] Error 2 (ignored)
+  CC       xmalloc.o
+Front end time                       0.05 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       1.00 (elapsed)
+  CC       xalloc-die.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       xsize.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       yesno.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       asnprintf.o
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  CC       chdir-long.o
+Front end time                       0.10 (CPU)       1.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       1.00 (elapsed)
+  CC       fclose.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fcntl.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+  CC       fflush.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fpurge.o
+Front end time                       0.06 (CPU)       1.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       1.00 (elapsed)
+  CC       fseek.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fseeko.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       fseterr.o
+Front end time                       0.04 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+  CC       fstat.o
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(66): warning #274: declaration is not visible outside of function
+  get_stat_atime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(69): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim).tv_nsec;
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(79): warning #274: declaration is not visible outside of function
+  get_stat_ctime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(82): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim).tv_nsec;
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(92): warning #274: declaration is not visible outside of function
+  get_stat_mtime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(95): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim).tv_nsec;
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(105): warning #274: declaration is not visible outside of function
+  get_stat_birthtime_ns (struct stat const *st _GL_UNUSED)
+                                ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(118): warning #274: declaration is not visible outside of function
+  get_stat_atime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(121): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim);
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(132): warning #274: declaration is not visible outside of function
+  get_stat_ctime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(135): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim);
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(146): warning #274: declaration is not visible outside of function
+  get_stat_mtime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(149): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim);
+           ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(161): warning #274: declaration is not visible outside of function
+  get_stat_birthtime (struct stat const *st _GL_UNUSED)
+                             ^
+
+In file included from ../../lib/fstat.c(48):
+../../lib/stat-time.h(211): warning #274: declaration is not visible outside of function
+  stat_time_normalize (int result, struct stat *st _GL_UNUSED)
+                                          ^
+
+../../lib/fstat.c(64): warning #274: declaration is not visible outside of function
+  rpl_fstat (int fd, struct stat *buf)
+                            ^
+
+../../lib/fstat.c(64): warning #147: declaration is incompatible with "int rpl_fstat(int, struct _stati64 *)" (declared at line 863 of "./sys/stat.h")
+  rpl_fstat (int fd, struct stat *buf)
+  ^
+
+../../lib/fstat.c(88): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    return stat_time_normalize (orig_fstat (fd, buf), buf);
+                                                ^
+
+../../lib/fstat.c(88): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct _stati64 *"
+    return stat_time_normalize (orig_fstat (fd, buf), buf);
+                                                      ^
+
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+compilation aborted for ../../lib/fstat.c (code 2)
+make[4]: [Makefile:1775: fstat.o] Error 2 (ignored)
+  CC       gettimeofday.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.03 (CPU)       0.00 (elapsed)
+  CC       localtime-buffer.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.02 (CPU)       0.00 (elapsed)
+  CC       lseek.o
+../../lib/lseek.c(57): error: incomplete type is not allowed
+    struct stat statbuf;
+                ^
+
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Total compilation time               0.05 (CPU)       0.00 (elapsed)
+compilation aborted for ../../lib/lseek.c (code 2)
+make[4]: [Makefile:1775: lseek.o] Error 2 (ignored)
+  CC       open.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       openat-proc.o
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       0.00 (elapsed)
+  CC       perror.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       printf-args.o
+Front end time                       0.03 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.04 (CPU)       0.00 (elapsed)
+  CC       printf-parse.o
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       stat.o
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(66): warning #274: declaration is not visible outside of function
+  get_stat_atime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(69): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(79): warning #274: declaration is not visible outside of function
+  get_stat_ctime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(82): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(92): warning #274: declaration is not visible outside of function
+  get_stat_mtime_ns (struct stat const *st)
+                            ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(95): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim).tv_nsec;
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(105): warning #274: declaration is not visible outside of function
+  get_stat_birthtime_ns (struct stat const *st _GL_UNUSED)
+                                ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(118): warning #274: declaration is not visible outside of function
+  get_stat_atime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(121): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim);
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(132): warning #274: declaration is not visible outside of function
+  get_stat_ctime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(135): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim);
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(146): warning #274: declaration is not visible outside of function
+  get_stat_mtime (struct stat const *st)
+                         ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(149): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim);
+           ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(161): warning #274: declaration is not visible outside of function
+  get_stat_birthtime (struct stat const *st _GL_UNUSED)
+                             ^
+
+In file included from ../../lib/stat.c(50):
+../../lib/stat-time.h(211): warning #274: declaration is not visible outside of function
+  stat_time_normalize (int result, struct stat *st _GL_UNUSED)
+                                          ^
+
+../../lib/stat.c(101): warning #274: declaration is not visible outside of function
+  rpl_stat (char const *name, struct stat *buf)
+                                     ^
+
+../../lib/stat.c(101): warning #147: declaration is incompatible with "int rpl_stat(const char *, struct _stati64 *)" (declared at line 1214 of "./sys/stat.h")
+  rpl_stat (char const *name, struct stat *buf)
+  ^
+
+../../lib/stat.c(409): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+    int result = orig_stat (name, buf);
+                                  ^
+
+../../lib/stat.c(425): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct _stati64 *"
+        result = stat_time_normalize (result, buf);
+                                              ^
+
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+compilation aborted for ../../lib/stat.c (code 2)
+make[4]: [Makefile:1775: stat.o] Error 2 (ignored)
+  CC       stat-w32.o
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.00 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  CC       strerror.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       strerror_r.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       utime.o
+Front end time                       0.02 (CPU)       0.00 (elapsed)
+Back end time                        0.00 (CPU)       0.00 (elapsed)
+Total compilation time               0.02 (CPU)       0.00 (elapsed)
+  CC       vasnprintf.o
+../../lib/vasnprintf.c(4848): warning #1292: unknown attribute "__fallthrough__"
+                      FALLTHROUGH;
+                      ^
+
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       1.00 (elapsed)
+Total compilation time               0.15 (CPU)       1.00 (elapsed)
+  AR       libgzip.a
+xiar: executing 'ar'
+ar: stat-time.o: No such file or directory
+make[4]: [Makefile:1645: libgzip.a] Error 1 (ignored)
+ranlib: 'libgzip.a': No such file
+make[4]: [Makefile:1646: libgzip.a] Error 1 (ignored)
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep/lib'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep/lib'
+Making all in doc
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir-indep/doc'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep/doc'
+Making all in .
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir-indep'
+  CC       bits.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       deflate.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       gzip.o
+In file included from ../gzip.c(78):
+../lib/stat-time.h(66): warning #274: declaration is not visible outside of function
+  get_stat_atime_ns (struct stat const *st)
+                            ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(69): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim).tv_nsec;
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(79): warning #274: declaration is not visible outside of function
+  get_stat_ctime_ns (struct stat const *st)
+                            ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(82): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim).tv_nsec;
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(92): warning #274: declaration is not visible outside of function
+  get_stat_mtime_ns (struct stat const *st)
+                            ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(95): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim).tv_nsec;
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(105): warning #274: declaration is not visible outside of function
+  get_stat_birthtime_ns (struct stat const *st _GL_UNUSED)
+                                ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(118): warning #274: declaration is not visible outside of function
+  get_stat_atime (struct stat const *st)
+                         ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(121): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_atim);
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(132): warning #274: declaration is not visible outside of function
+  get_stat_ctime (struct stat const *st)
+                         ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(135): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_ctim);
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(146): warning #274: declaration is not visible outside of function
+  get_stat_mtime (struct stat const *st)
+                         ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(149): error: pointer to incomplete class type is not allowed
+    return STAT_TIMESPEC (st, st_mtim);
+           ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(161): warning #274: declaration is not visible outside of function
+  get_stat_birthtime (struct stat const *st _GL_UNUSED)
+                             ^
+
+In file included from ../gzip.c(78):
+../lib/stat-time.h(211): warning #274: declaration is not visible outside of function
+  stat_time_normalize (int result, struct stat *st _GL_UNUSED)
+                                          ^
+
+../gzip.c(605): warning #1292: unknown attribute "__fallthrough__"
+              FALLTHROUGH;
+              ^
+
+../gzip.c(763): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct _stati64 *"
+      if (fstat (STDIN_FILENO, &istat) != 0)
+                               ^
+
+../gzip.c(768): error: incomplete type is not allowed
+      ifile_size = S_ISREG (istat.st_mode) ? istat.st_size : -1;
+                   ^
+
+../gzip.c(768): error: incomplete type is not allowed
+      ifile_size = S_ISREG (istat.st_mode) ? istat.st_size : -1;
+                                             ^
+
+../gzip.c(772): error: incomplete type is not allowed
+          if (S_ISREG (istat.st_mode))
+              ^
+
+../gzip.c(773): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+            time_stamp = get_stat_mtime (&istat);
+                                         ^
+
+../gzip.c(887): error: incomplete type is not allowed
+      if (S_ISDIR(istat.st_mode)) {
+          ^
+
+../gzip.c(903): error: incomplete type is not allowed
+          if (! S_ISREG (istat.st_mode))
+                ^
+
+../gzip.c(911): error: incomplete type is not allowed
+          if (istat.st_mode & S_ISUID)
+              ^
+
+../gzip.c(918): error: incomplete type is not allowed
+          if (istat.st_mode & S_ISGID)
+              ^
+
+../gzip.c(928): error: incomplete type is not allowed
+              if (istat.st_mode & S_ISVTX)
+                  ^
+
+../gzip.c(936): error: incomplete type is not allowed
+              if (2 <= istat.st_nlink)
+                       ^
+
+../gzip.c(938): error: incomplete type is not allowed
+                  WARN ((stderr, "%s: %s has %lu other link%c -- unchanged\n",
+                  ^
+
+../gzip.c(938): error: incomplete type is not allowed
+                  WARN ((stderr, "%s: %s has %lu other link%c -- unchanged\n",
+                  ^
+
+../gzip.c(948): error: incomplete type is not allowed
+      ifile_size = S_ISREG (istat.st_mode) ? istat.st_size : -1;
+                   ^
+
+../gzip.c(948): error: incomplete type is not allowed
+      ifile_size = S_ISREG (istat.st_mode) ? istat.st_size : -1;
+                                             ^
+
+../gzip.c(951): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+        time_stamp = get_stat_mtime (&istat);
+                                     ^
+
+../gzip.c(1239): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct stat *"
+            if (lstat (name, st) != 0)
+                             ^
+
+../gzip.c(1241): error: pointer to incomplete class type is not allowed
+            else if (S_ISLNK (st->st_mode))
+                     ^
+
+../gzip.c(1262): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "struct _stati64 *"
+    if (0 <= fd && fstat (fd, st) != 0)
+                              ^
+
+../gzip.c(1943): error: pointer to incomplete class type is not allowed
+      mode_t mode = ifstat->st_mode & S_IRWXUGO;
+                    ^
+
+../gzip.c(1949): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+      timespec[0] = get_stat_atime (ifstat);
+                                    ^
+
+../gzip.c(1950): warning #167: argument of type "struct _stati64 *" is incompatible with parameter of type "const struct _stati64 *"
+      timespec[1] = get_stat_mtime (ifstat);
+                                    ^
+
+../gzip.c(1981): error: pointer to incomplete class type is not allowed
+      do_chown (ofd, ofname, -1, ifstat->st_gid);
+                                 ^
+
+../gzip.c(1997): error: pointer to incomplete class type is not allowed
+      do_chown (ofd, ofname, ifstat->st_uid, -1);
+                             ^
+
+../gzip.c(226): error: variable "istat" was declared with a never-completed type
+  static struct stat istat;         /* status for input file */
+                     ^
+
+Front end time                       0.17 (CPU)       1.00 (elapsed)
+Total compilation time               0.17 (CPU)       1.00 (elapsed)
+compilation aborted for ../gzip.c (code 2)
+make[3]: [Makefile:1681: gzip.o] Error 2 (ignored)
+  CC       inflate.o
+Front end time                       0.08 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.12 (CPU)       0.00 (elapsed)
+  CC       lzw.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       trees.o
+Front end time                       0.07 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       unlzh.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.09 (CPU)       0.00 (elapsed)
+  CC       unlzw.o
+Front end time                       0.09 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.11 (CPU)       0.00 (elapsed)
+  CC       unpack.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.07 (CPU)       0.00 (elapsed)
+  CC       unzip.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       util.o
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       1.00 (elapsed)
+Total compilation time               0.15 (CPU)       1.00 (elapsed)
+  CC       zip.o
+Front end time                       0.06 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.08 (CPU)       0.00 (elapsed)
+  CC       version.o
+Front end time                       0.01 (CPU)       0.00 (elapsed)
+Back end time                        0.00 (CPU)       0.00 (elapsed)
+Total compilation time               0.01 (CPU)       0.00 (elapsed)
+  AR       libver.a
+xiar: executing 'ar'
+make[3]: *** No rule to make target 'lib/libgzip.a', needed by 'gzip'.  Stop.
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep'
+make[2]: [Makefile:1746: all-recursive] Error 1 (ignored)
+make[2]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep'
+make[1]: Leaving directory '/dev/shm/gzip/gzip/builddir-indep'
+:>build-indep-stamp
+ fakeroot debian/rules binary
+dh_testdir
+dh_testroot
+if test -x "$(which dh_prep)"; then dh_prep; else dh_clean -k; fi
+	rm -f -- debian/gzip.substvars debian/gzip-win32.substvars
+	rm -fr -- debian/.debhelper/generated/gzip/ debian/gzip/ debian/tmp/ debian/.debhelper/generated/gzip-win32/ debian/gzip-win32/
+dh_installdirs
+	install -d debian/gzip/bin debian/gzip/usr/share/info debian/gzip/usr/share/lintian/overrides debian/gzip/usr/share/man/man1
+	install -d debian/gzip-win32/usr/share/win32
+/usr/bin/make -C builddir install \
+    prefix='/dev/shm/gzip/gzip'/debian/gzip/usr \
+    bindir='/dev/shm/gzip/gzip'/debian/gzip/bin
+make[1]: Entering directory '/dev/shm/gzip/gzip/builddir'
+/usr/bin/make  install-recursive
+make[2]: Entering directory '/dev/shm/gzip/gzip/builddir'
+Making install in lib
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/lib'
+/usr/bin/make  install-am
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir/lib'
+make[5]: Entering directory '/dev/shm/gzip/gzip/builddir/lib'
+make[5]: Nothing to be done for 'install-exec-am'.
+make[5]: Nothing to be done for 'install-data-am'.
+make[5]: Leaving directory '/dev/shm/gzip/gzip/builddir/lib'
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir/lib'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/lib'
+Making install in doc
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/doc'
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir/doc'
+make[4]: Nothing to be done for 'install-exec-am'.
+ /bin/mkdir -p '/dev/shm/gzip/gzip/debian/gzip/usr/share/info'
+ /usr/bin/install -m 644 ../../doc/gzip.info '/dev/shm/gzip/gzip/debian/gzip/usr/share/info'
+ install-info --info-dir='/dev/shm/gzip/gzip/debian/gzip/usr/share/info' '/dev/shm/gzip/gzip/debian/gzip/usr/share/info/gzip.info'
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir/doc'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/doc'
+Making install in .
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir'
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir'
+ /bin/mkdir -p '/dev/shm/gzip/gzip/debian/gzip/bin'
+  /usr/bin/install gzip '/dev/shm/gzip/gzip/debian/gzip/bin'
+ /bin/mkdir -p '/dev/shm/gzip/gzip/debian/gzip/bin'
+ /usr/bin/install gunzip gzexe zcat zcmp zdiff zegrep zfgrep zforce zgrep zless zmore znew '/dev/shm/gzip/gzip/debian/gzip/bin'
+/usr/bin/make  install-exec-hook
+make[5]: Entering directory '/dev/shm/gzip/gzip/builddir'
++ cd /dev/shm/gzip/gzip/debian/gzip/bin
++ rm -f uncompress
++ case remove-installed-links in
++ cd /dev/shm/gzip/gzip/debian/gzip/bin
++ rm -f uncompress
++ case install-exec-hook in
++ ln gunzip uncompress
+make[5]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+ /bin/mkdir -p '/dev/shm/gzip/gzip/debian/gzip/usr/share/man/man1'
+ /usr/bin/install -m 644 ../gunzip.1 ../gzexe.1 ../gzip.1 ../zcat.1 ../zcmp.1 ../zdiff.1 ../zforce.1 ../zgrep.1 ../zless.1 ../zmore.1 ../znew.1 '/dev/shm/gzip/gzip/debian/gzip/usr/share/man/man1'
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+Making install in tests
+make[3]: Entering directory '/dev/shm/gzip/gzip/builddir/tests'
+make[4]: Entering directory '/dev/shm/gzip/gzip/builddir/tests'
+make[4]: Nothing to be done for 'install-exec-am'.
+make[4]: Nothing to be done for 'install-data-am'.
+make[4]: Leaving directory '/dev/shm/gzip/gzip/builddir/tests'
+make[3]: Leaving directory '/dev/shm/gzip/gzip/builddir/tests'
+make[2]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+make[1]: Leaving directory '/dev/shm/gzip/gzip/builddir'
+dh_testdir -s
+dh_testdir: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_testdir: This feature will be removed in compat 12.
+dh_testroot -s
+dh_installdocs -s README* TODO
+dh_installdocs: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_installdocs: This feature will be removed in compat 12.
+	install -d debian/gzip/usr/share/doc/gzip
+	install -d debian/.debhelper/generated/gzip
+	install -p -m0644 debian/copyright debian/gzip/usr/share/doc/gzip/copyright
+	install -d debian/.debhelper/generated/gzip-win32
+dh_installman *.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/znew.1 > debian/gzip/usr/share/man/man1/znew.1.dh-new
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zless.1 > debian/gzip/usr/share/man/man1/zless.1.dh-new
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zforce.1 > debian/gzip/usr/share/man/man1/zforce.1.dh-new
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zcmp.1 > debian/gzip/usr/share/man/man1/zcmp.1.dh-new
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/gzip.1 > debian/gzip/usr/share/man/man1/gzip.1.dh-new
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/gunzip.1 > debian/gzip/usr/share/man/man1/gunzip.1.dh-new
+	mv debian/gzip/usr/share/man/man1/zforce.1.dh-new debian/gzip/usr/share/man/man1/zforce.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zdiff.1 > debian/gzip/usr/share/man/man1/zdiff.1.dh-new
+	mv debian/gzip/usr/share/man/man1/gunzip.1.dh-new debian/gzip/usr/share/man/man1/gunzip.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/gunzip.1
+	mv debian/gzip/usr/share/man/man1/znew.1.dh-new debian/gzip/usr/share/man/man1/znew.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zmore.1 > debian/gzip/usr/share/man/man1/zmore.1.dh-new
+	mv debian/gzip/usr/share/man/man1/zless.1.dh-new debian/gzip/usr/share/man/man1/zless.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zgrep.1 > debian/gzip/usr/share/man/man1/zgrep.1.dh-new
+	mv debian/gzip/usr/share/man/man1/gzip.1.dh-new debian/gzip/usr/share/man/man1/gzip.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/gzexe.1 > debian/gzip/usr/share/man/man1/gzexe.1.dh-new
+	mv debian/gzip/usr/share/man/man1/zcmp.1.dh-new debian/gzip/usr/share/man/man1/zcmp.1
+	man -l --recode UTF-8 ./debian/gzip/usr/share/man/man1/zcat.1 > debian/gzip/usr/share/man/man1/zcat.1.dh-new
+	mv debian/gzip/usr/share/man/man1/zmore.1.dh-new debian/gzip/usr/share/man/man1/zmore.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/znew.1 debian/gzip/usr/share/man/man1/zmore.1
+	mv debian/gzip/usr/share/man/man1/zdiff.1.dh-new debian/gzip/usr/share/man/man1/zdiff.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/zforce.1 debian/gzip/usr/share/man/man1/zdiff.1
+	mv debian/gzip/usr/share/man/man1/gzexe.1.dh-new debian/gzip/usr/share/man/man1/gzexe.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/gzip.1 debian/gzip/usr/share/man/man1/gzexe.1
+	mv debian/gzip/usr/share/man/man1/zcat.1.dh-new debian/gzip/usr/share/man/man1/zcat.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/zcmp.1 debian/gzip/usr/share/man/man1/zcat.1
+	mv debian/gzip/usr/share/man/man1/zgrep.1.dh-new debian/gzip/usr/share/man/man1/zgrep.1
+	chmod 0644 -- debian/gzip/usr/share/man/man1/zless.1 debian/gzip/usr/share/man/man1/zgrep.1
+dh_installinfo -s doc/gzip.info
+dh_installinfo: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_installinfo: This feature will be removed in compat 12.
+dh_installchangelogs -s ChangeLog
+dh_installchangelogs: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_installchangelogs: This feature will be removed in compat 12.
+	install -p -m0644 debian/changelog debian/gzip/usr/share/doc/gzip/changelog.Debian
+	install -p -m0644 ChangeLog debian/gzip/usr/share/doc/gzip/changelog
+dh_link -s
+dh_link: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_link: This feature will be removed in compat 12.
+dh_lintian -s
+dh_lintian: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_lintian: This feature will be removed in compat 12.
+dh_strip -s
+dh_strip: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_strip: This feature will be removed in compat 12.
+	install -d debian/.debhelper/gzip/dbgsym-root/usr/lib/debug/.build-id/1d
+	objcopy --only-keep-debug --compress-debug-sections debian/gzip/bin/gzip debian/.debhelper/gzip/dbgsym-root/usr/lib/debug/.build-id/1d/5150fc5e9e3464ce19ecee82d838382ed02be0.debug
+	chmod 0644 -- debian/.debhelper/gzip/dbgsym-root/usr/lib/debug/.build-id/1d/5150fc5e9e3464ce19ecee82d838382ed02be0.debug
+	chown 0:0 -- debian/.debhelper/gzip/dbgsym-root/usr/lib/debug/.build-id/1d/5150fc5e9e3464ce19ecee82d838382ed02be0.debug
+	strip --remove-section=.comment --remove-section=.note debian/gzip/bin/gzip
+	objcopy --add-gnu-debuglink debian/.debhelper/gzip/dbgsym-root/usr/lib/debug/.build-id/1d/5150fc5e9e3464ce19ecee82d838382ed02be0.debug debian/gzip/bin/gzip
+	install -d debian/.debhelper/gzip/dbgsym-root/usr/share/doc
+	ln -s gzip debian/.debhelper/gzip/dbgsym-root/usr/share/doc/gzip-dbgsym
+dh_compress -s
+dh_compress: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_compress: This feature will be removed in compat 12.
+	cd debian/gzip
+	chmod a-x usr/share/doc/gzip/changelog usr/share/doc/gzip/changelog.Debian usr/share/info/dir usr/share/info/gzip.info usr/share/man/man1/gunzip.1 usr/share/man/man1/gzexe.1 usr/share/man/man1/gzip.1 usr/share/man/man1/zcat.1 usr/share/man/man1/zcmp.1 usr/share/man/man1/zdiff.1 usr/share/man/man1/zforce.1 usr/share/man/man1/zgrep.1 usr/share/man/man1/zless.1 usr/share/man/man1/zmore.1 usr/share/man/man1/znew.1
+	gzip -9nf usr/share/doc/gzip/changelog usr/share/doc/gzip/changelog.Debian usr/share/info/dir usr/share/info/gzip.info usr/share/man/man1/gunzip.1 usr/share/man/man1/gzexe.1 usr/share/man/man1/gzip.1 usr/share/man/man1/zcat.1 usr/share/man/man1/zcmp.1 usr/share/man/man1/zdiff.1 usr/share/man/man1/zforce.1 usr/share/man/man1/zgrep.1 usr/share/man/man1/zless.1 usr/share/man/man1/zmore.1 usr/share/man/man1/znew.1
+	cd '/dev/shm/gzip/gzip'
+ln -s gunzip.1.gz debian/gzip/usr/share/man/man1/uncompress.1.gz
+ln -s zgrep.1.gz debian/gzip/usr/share/man/man1/zegrep.1.gz
+ln -s zgrep.1.gz debian/gzip/usr/share/man/man1/zfgrep.1.gz
+rm -f '/dev/shm/gzip/gzip'/debian/gzip/usr/share/info/dir.gz
+dh_fixperms -s
+dh_fixperms: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_fixperms: This feature will be removed in compat 12.
+	find debian/gzip -true -print0 2>/dev/null | xargs -0r chown --no-dereference 0:0
+	find debian/gzip ! -type l -a -true -a -true -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw,a-s
+	find debian/gzip/usr/share/doc -type f -a -true -a ! -regex 'debian/gzip/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/gzip/usr/share/doc -type d -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0755
+	find debian/gzip/usr/share/man debian/gzip/usr/share/lintian/overrides -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/gzip -type f \( -name '*.so.*' -o -name '*.so' -o -name '*.la' -o -name '*.a' -o -name '*.js' -o -name '*.css' -o -name '*.scss' -o -name '*.sass' -o -name '*.jpeg' -o -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.cmxs' \) -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/gzip/bin -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod a+x
+dh_makeshlibs -s
+dh_makeshlibs: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_makeshlibs: This feature will be removed in compat 12.
+	rm -f debian/gzip/DEBIAN/shlibs
+dh_installdeb -s
+dh_installdeb: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_installdeb: This feature will be removed in compat 12.
+	install -d debian/gzip/DEBIAN
+dh_shlibdeps -s
+dh_shlibdeps: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_shlibdeps: This feature will be removed in compat 12.
+	dpkg-shlibdeps -Tdebian/gzip.substvars debian/gzip/bin/gzip
+dpkg-shlibdeps: warning: deprecated use of LD_LIBRARY_PATH with private library directory which interferes with cross-building, please use -l option instead
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/gzip/bin/gzip was not linked against libdl.so.2 (it uses none of the library's symbols)
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/gzip/bin/gzip was not linked against libgcc_s.so.1 (it uses none of the library's symbols)
+dh_gencontrol -s
+dh_gencontrol: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_gencontrol: This feature will be removed in compat 12.
+	echo misc:Depends= >> debian/gzip.substvars
+	echo misc:Pre-Depends= >> debian/gzip.substvars
+	install -d debian/.debhelper/gzip/dbgsym-root/DEBIAN
+	dpkg-gencontrol -pgzip -ldebian/changelog -Tdebian/gzip.substvars -Pdebian/.debhelper/gzip/dbgsym-root -UPre-Depends -URecommends -USuggests -UEnhances -UProvides -UEssential -UConflicts -DPriority=optional -UHomepage -UImportant -DAuto-Built-Package=debug-symbols -DPackage=gzip-dbgsym "-DDepends=gzip (= \${binary:Version})" "-DDescription=debug symbols for gzip" -DBuild-Ids=1d5150fc5e9e3464ce19ecee82d838382ed02be0 -DSection=debug -UMulti-Arch -UReplaces -UBreaks
+	chmod 0644 -- debian/.debhelper/gzip/dbgsym-root/DEBIAN/control
+	chown 0:0 -- debian/.debhelper/gzip/dbgsym-root/DEBIAN/control
+	dpkg-gencontrol -pgzip -ldebian/changelog -Tdebian/gzip.substvars -Pdebian/gzip -UMulti-Arch
+	chmod 0644 -- debian/gzip/DEBIAN/control
+	chown 0:0 -- debian/gzip/DEBIAN/control
+dh_md5sums -s
+dh_md5sums: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_md5sums: This feature will be removed in compat 12.
+	cd debian/gzip >/dev/null && xargs -r0 md5sum | perl -pe 'if (s@^\\@@) { s/\\\\/\\/g; }' > DEBIAN/md5sums
+	chmod 0644 -- debian/gzip/DEBIAN/md5sums
+	chown 0:0 -- debian/gzip/DEBIAN/md5sums
+	cd debian/.debhelper/gzip/dbgsym-root >/dev/null && xargs -r0 md5sum | perl -pe 'if (s@^\\@@) { s/\\\\/\\/g; }' > DEBIAN/md5sums
+	chmod 0644 -- debian/.debhelper/gzip/dbgsym-root/DEBIAN/md5sums
+	chown 0:0 -- debian/.debhelper/gzip/dbgsym-root/DEBIAN/md5sums
+dh_builddeb -s
+dh_builddeb: -s/--same-arch is deprecated; please use -a/--arch instead
+dh_builddeb: This feature will be removed in compat 12.
+	dpkg-deb --build debian/gzip ..
+	dpkg-deb --build debian/.debhelper/gzip/dbgsym-root ..
+dpkg-deb: building package 'gzip' in '../gzip_1.9-2_amd64.deb'.
+dpkg-deb: building package 'gzip-dbgsym' in '../gzip-dbgsym_1.9-2_amd64.deb'.
+dh_testdir
+dh_testroot
+if test -x "$(which dh_prep)"; then dh_prep; else dh_clean -k; fi
+	rm -f -- debian/gzip.substvars debian/gzip-win32.substvars
+	rm -fr -- debian/.debhelper/generated/gzip/ debian/gzip/ debian/tmp/ debian/.debhelper/generated/gzip-win32/ debian/gzip-win32/
+dh_installdirs
+	install -d debian/gzip/bin debian/gzip/usr/share/info debian/gzip/usr/share/lintian/overrides debian/gzip/usr/share/man/man1
+	install -d debian/gzip-win32/usr/share/win32
+i686-w64-mingw32-strip builddir-indep/gzip.exe
+make: i686-w64-mingw32-strip: Command not found
+make: [debian/rules:123: binary-indep] Error 127 (ignored)
+install -m 0755 builddir-indep/gzip.exe \
+    debian/gzip-win32/usr/share/win32/
+install: cannot stat 'builddir-indep/gzip.exe': No such file or directory
+make: [debian/rules:124: binary-indep] Error 1 (ignored)
+dh_installdocs -i README* TODO
+	install -d debian/.debhelper/generated/gzip
+	install -d debian/gzip-win32/usr/share/doc/gzip-win32
+	install -d debian/.debhelper/generated/gzip-win32
+	install -p -m0644 debian/copyright debian/gzip-win32/usr/share/doc/gzip-win32/copyright
+dh_installchangelogs -i ChangeLog
+	install -p -m0644 debian/changelog debian/gzip-win32/usr/share/doc/gzip-win32/changelog.Debian
+	install -p -m0644 ChangeLog debian/gzip-win32/usr/share/doc/gzip-win32/changelog
+dh_lintian -i
+dh_compress -i
+	cd debian/gzip-win32
+	chmod a-x usr/share/doc/gzip-win32/changelog usr/share/doc/gzip-win32/changelog.Debian
+	gzip -9nf usr/share/doc/gzip-win32/changelog usr/share/doc/gzip-win32/changelog.Debian
+	cd '/dev/shm/gzip/gzip'
+dh_fixperms -i
+	find debian/gzip-win32 -true -print0 2>/dev/null | xargs -0r chown --no-dereference 0:0
+	find debian/gzip-win32 ! -type l -a -true -a -true -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw,a-s
+	find debian/gzip-win32/usr/share/doc -type f -a -true -a ! -regex 'debian/gzip-win32/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/gzip-win32/usr/share/doc -type d -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0755
+	find debian/gzip-win32 -type f \( -name '*.so.*' -o -name '*.so' -o -name '*.la' -o -name '*.a' -o -name '*.js' -o -name '*.css' -o -name '*.scss' -o -name '*.sass' -o -name '*.jpeg' -o -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.cmxs' \) -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+dh_installdeb -i
+	install -d debian/gzip-win32/DEBIAN
+dh_gencontrol -i
+	echo misc:Depends= >> debian/gzip-win32.substvars
+	echo misc:Pre-Depends= >> debian/gzip-win32.substvars
+	dpkg-gencontrol -pgzip-win32 -ldebian/changelog -Tdebian/gzip-win32.substvars -Pdebian/gzip-win32 -UMulti-Arch
+	chmod 0644 -- debian/gzip-win32/DEBIAN/control
+	chown 0:0 -- debian/gzip-win32/DEBIAN/control
+dh_md5sums -i
+	cd debian/gzip-win32 >/dev/null && xargs -r0 md5sum | perl -pe 'if (s@^\\@@) { s/\\\\/\\/g; }' > DEBIAN/md5sums
+	chmod 0644 -- debian/gzip-win32/DEBIAN/md5sums
+	chown 0:0 -- debian/gzip-win32/DEBIAN/md5sums
+dh_builddeb -i
+	dpkg-deb --build debian/gzip-win32 ..
+dpkg-deb: building package 'gzip-win32' in '../gzip-win32_1.9-2_all.deb'.
+FAKEROOTKEY=1520430453 LD_LIBRARY_PATH=:/opt/intel/lib/intel64_lin:/opt/intel/tbb/lib/intel64/gcc4.7 LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libfakeroot/libfakeroot-sysv.so debian/rules binary
+ dpkg-genbuildinfo --build=binary
+ dpkg-genchanges --build=binary >../gzip_1.9-2_amd64.changes
+dpkg-genchanges: info: binary-only upload (no source code included)
+ dpkg-source --after-build .
+dpkg-source: info: unapplying 0001-gzip-port-better-to-mingw-again.patch
+dpkg-source: info: unapplying 0001-gzip-port-better-to-mingw.patch
+dpkg-source: info: unapplying zgrep-syntax-error.diff
+dpkg-source: info: unapplying gzip_reproducible_build.diff
+dpkg-source: info: unapplying sigpipe.diff
+dpkg-buildpackage: info: binary-only upload (no source included)
+Now running lintian gzip_1.9-2_amd64.changes ...
+W: gzip: hardening-no-pie bin/gzip
+W: gzip-win32: empty-binary-package
+Finished running lintian.

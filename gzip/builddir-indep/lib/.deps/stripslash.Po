@@ -1,0 +1,12 @@
+stripslash.o: ../../lib/stripslash.c ./config.h ../../lib/dirname.h \
+ /opt/intel/include/stdbool.h /opt/intel/include/stddef.h ../../lib/dosname.h
+
+./config.h:
+
+../../lib/dirname.h:
+
+/opt/intel/include/stdbool.h:
+
+/opt/intel/include/stddef.h:
+
+../../lib/dosname.h:

@@ -1,0 +1,12 @@
+Package: gzip-dbgsym
+Source: gzip
+Version: 1.9-2
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Bdale Garbee <bdale@gag.com>
+Installed-Size: 135
+Depends: gzip (= 1.9-2)
+Section: debug
+Priority: optional
+Description: debug symbols for gzip
+Build-Ids: 1d5150fc5e9e3464ce19ecee82d838382ed02be0

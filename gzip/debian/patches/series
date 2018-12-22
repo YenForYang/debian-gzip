@@ -1,0 +1,5 @@
+sigpipe.diff
+gzip_reproducible_build.diff
+zgrep-syntax-error.diff
+0001-gzip-port-better-to-mingw.patch
+0001-gzip-port-better-to-mingw-again.patch

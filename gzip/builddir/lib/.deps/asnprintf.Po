@@ -1,0 +1,10 @@
+asnprintf.o: ../../lib/asnprintf.c ./config.h ../../lib/vasnprintf.h \
+ /opt/intel/include/stdarg.h /opt/intel/include/stddef.h
+
+./config.h:
+
+../../lib/vasnprintf.h:
+
+/opt/intel/include/stdarg.h:
+
+/opt/intel/include/stddef.h:
